@@ -425,7 +425,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────
+// ── DATA (global) ─────────────────────────────────────
 const zones = [
   {name:"Floors",sub:"bedroom + bathroom"},
   {name:"Jewelry",sub:"shelf + display"},
@@ -434,10 +434,10 @@ const zones = [
   {name:"TV Stand",sub:"surface + unit"},
   {name:"Chest of Drawers",sub:"top + drawers closed"},
   {name:"Office",sub:"desk + chair + cords"},
-  {name:"Closet — Hanging",sub:"shirts + skirts + dresses"},
-  {name:"Closet — Bags",sub:"cubbies + hooks"},
-  {name:"Closet — Hamper",sub:"contained, not overflowing"},
-  {name:"Closet — Shoes",sub:"floor clear"},
+  {name:"Closet \u2014 Hanging",sub:"shirts + skirts + dresses"},
+  {name:"Closet \u2014 Bags",sub:"cubbies + hooks"},
+  {name:"Closet \u2014 Hamper",sub:"contained, not overflowing"},
+  {name:"Closet \u2014 Shoes",sub:"floor clear"},
   {name:"Shower",sub:"products in place"},
   {name:"Sink",sub:"counter clear, drain clean"},
   {name:"Bathroom Closet",sub:"towels + supplies"},
@@ -448,13 +448,13 @@ const focusZones = [
   {name:"Jewelry",desc:"Edit the display. Untangle what needs untangling. Let what you love be visible."},
   {name:"Nightstands",desc:"Clear both surfaces down to only what serves your rest. This is sacred sleep space."},
   {name:"Makeup",desc:"Reset the vanity. Return each thing to its place. Let the space be ready for tomorrow's version of you."},
-  {name:"TV Stand",desc:"Clear the surface. Let the space breathe. Nothing here that doesn't belong."},
+  {name:"TV Stand",desc:"Clear the surface. Let the space breathe. Nothing here that does not belong."},
   {name:"Chest of Drawers",desc:"Top surface clear. Every drawer fully closed. Contained and calm."},
   {name:"Office",desc:"Your desk cleared, your chair free. Tomorrow's work begins in today's order."},
-  {name:"Closet — Hanging",desc:"Every piece on a hanger, facing the same direction. Your wardrobe, curated."},
-  {name:"Closet — Bags",desc:"Every bag in its home. Nothing piled, nothing searching for a place."},
-  {name:"Closet — Hamper",desc:"Contained. Not overflowing. What's worn is accounted for."},
-  {name:"Closet — Shoes",desc:"Every pair has a place. The floor of your closet is clear and intentional."},
+  {name:"Closet \u2014 Hanging",desc:"Every piece on a hanger, facing the same direction. Your wardrobe, curated."},
+  {name:"Closet \u2014 Bags",desc:"Every bag in its home. Nothing piled, nothing searching for a place."},
+  {name:"Closet \u2014 Hamper",desc:"Contained. Not overflowing. What is worn is accounted for."},
+  {name:"Closet \u2014 Shoes",desc:"Every pair has a place. The floor of your closet is clear and intentional."},
   {name:"Shower",desc:"Products returned to their place. The space wiped and ready. A clean start for tomorrow."},
   {name:"Sink",desc:"The counter wiped clean. Mirror clear. A fresh surface for the woman who wakes up here."},
   {name:"Bathroom Closet",desc:"Towels folded, supplies in order. Quiet abundance, well organized."},
@@ -464,16 +464,16 @@ const quotes = [
   {text:"I am deliberate and afraid of nothing.",attr:"Audre Lorde"},
   {text:"She remembered who she was and the game changed.",attr:"Lalah Delia"},
   {text:"You are allowed to be both a masterpiece and a work in progress.",attr:"Sophia Bush"},
-  {text:"My alone feels so good, I'll only have you if you're sweeter than my solitude.",attr:"Warsan Shire"},
+  {text:"My alone feels so good, I will only have you if you are sweeter than my solitude.",attr:"Warsan Shire"},
   {text:"You are your best thing.",attr:"Toni Morrison"},
-  {text:"If you don't like the road you're walking, start paving another one.",attr:"Dolly Parton"},
+  {text:"If you do not like the road you are walking, start paving another one.",attr:"Dolly Parton"},
   {text:"The most courageous act is still to think for yourself. Aloud.",attr:"Coco Chanel"},
   {text:"There is no limit to what we, as women, can accomplish.",attr:"Michelle Obama"},
   {text:"I am not lucky. I am smart, I am talented, I take advantage of the opportunities that come my way.",attr:"Viola Davis"},
   {text:"Step into the fire of self-discovery. This fire will not burn you, it will only burn what you are not.",attr:"Mooji"},
   {text:"Your crown has been bought and paid for. Put it on your head and wear it.",attr:"Maya Angelou"},
   {text:"A woman who knows what she brings to the table is not afraid to eat alone.",attr:"unknown"},
-  {text:"Owning our story and loving ourselves through that process is the bravest thing we'll ever do.",attr:"Brené Brown"},
+  {text:"Owning our story and loving ourselves through that process is the bravest thing we will ever do.",attr:"Brene Brown"},
   {text:"She made broken look beautiful and strong look invincible.",attr:"Ariana Dancu"},
   {text:"The woman who does not require validation from anyone is the most feared individual on the planet.",attr:"Mohadesa Najumi"},
   {text:"Real change, enduring change, happens one step at a time.",attr:"Ruth Bader Ginsburg"},
@@ -482,7 +482,7 @@ const quotes = [
   {text:"She decided to enjoy the simple luxury of being herself.",attr:"unknown"},
   {text:"You are not a drop in the ocean. You are the entire ocean in a drop.",attr:"Rumi"},
   {text:"I am not afraid of storms, for I am learning how to sail my ship.",attr:"Louisa May Alcott"},
-  {text:"I'm not going to be the woman who didn't try.",attr:"Viola Davis"},
+  {text:"I am not going to be the woman who did not try.",attr:"Viola Davis"},
   {text:"Your life is your story. Write well. Edit often.",attr:"unknown"},
   {text:"Refinement is not restriction. It is choosing with intention.",attr:"unknown"},
   {text:"She is water. Powerful enough to drown you, soft enough to cleanse you.",attr:"unknown"},
@@ -502,11 +502,11 @@ const facts = [
   "Butterflies taste with their feet.",
   "A group of flamingos is called a flamboyance.",
   "The Mona Lisa has no eyebrows — it was fashionable to shave them in Renaissance Florence.",
-  "Sea otters hold hands while sleeping so they don't drift apart.",
+  "Sea otters hold hands while sleeping so they do not drift apart.",
   "Your brain generates enough electricity while awake to power a small lightbulb.",
-  "In Switzerland, it's illegal to own just one guinea pig — they get lonely.",
+  "In Switzerland, it is illegal to own just one guinea pig — they get lonely.",
   "The color orange was named after the fruit, not the other way around.",
-  "There's a species of jellyfish that is technically biologically immortal.",
+  "There is a species of jellyfish that is technically biologically immortal.",
   "The dot over a lowercase i or j is called a tittle.",
   "Bananas are curved because they grow toward the sun.",
   "Honey never spoils — edible honey has been found in 3,000-year-old Egyptian tombs.",
@@ -522,156 +522,83 @@ const facts = [
   "The hashtag symbol is technically called an octothorpe.",
 ];
 
-const morningPrompts = [
-  "What are you calling in today?",
-  "What does today's version of you need most?",
-  "What would make today feel like a win, even a small one?",
-  "What are you choosing to release before this day begins?",
-  "What energy are you walking into today with?",
-  "What does your body need from you today?",
-  "Who are you becoming today?",
-];
-
 const eveningPrompts = [
   "What part of your space made you feel most like yourself today?",
   "Where did you feel most resistance today — in your space or in yourself?",
-  "What's one thing you're releasing tonight — physically or emotionally?",
+  "What is one thing you are releasing tonight — physically or emotionally?",
   "Did your space match your energy today? What would you change?",
   "What does tomorrow's version of you need from your space?",
   "Where did you show up for yourself today, even in a small way?",
   "What felt heavy today? What felt light?",
   "If your room were a reflection of your inner world right now, what would it say?",
-  "What's one thing you did today that future Kay will thank you for?",
+  "What is one thing you did today that future Kay will thank you for?",
   "What were you avoiding today — and is that okay?",
   "How did your body feel moving through your space today?",
-  "What moment today felt most aligned with the woman you're becoming?",
+  "What moment today felt most aligned with the woman you are becoming?",
   "What needs your attention tomorrow that you can release tonight?",
   "Did you give yourself grace today? Where could you offer more?",
-  "What's one small act of care worth acknowledging before you sleep?",
+  "What is one small act of care worth acknowledging before you sleep?",
   "What would it look like to fully trust yourself tomorrow?",
   "What energy are you choosing to wake up with?",
   "What did your space teach you about yourself today?",
   "How did you love yourself today, even imperfectly?",
-  "What's one thing that went better than expected?",
+  "What is one thing that went better than expected?",
   "Where did you find beauty today — in your space, your body, your life?",
 ];
 
-document.addEventListener('DOMContentLoaded', function() {
-// ── DATE + SEED ───────────────────────────────────────
-const today = new Date();
-const DAYS_LONG  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTHS     = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0LJ7KirLReGIUe0kVZKYBLovJFF4W7-nVSD1kcBXhIyPrs1quNTFkuxyyERbSdLwZog/exec';
 const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const todayKey   = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-const dayOfYear  = Math.ceil((today - new Date(today.getFullYear(),0,1))/86400000);
 
-document.getElementById('date-main').textContent = `${DAYS_LONG[today.getDay()]}, ${MONTHS[today.getMonth()]} ${today.getDate()}`;
-document.getElementById('date-sub').textContent   = `${today.getFullYear()} · day ${dayOfYear} of 365`;
+// ── PURE UTILS (global) ───────────────────────────────
+function seeded(seed, max) {
+  const x = Math.sin(seed) * 10000;
+  return Math.floor((x - Math.floor(x)) * max);
+}
+function loadEntry(key) {
+  try { const r = localStorage.getItem('ck_entry_'+key); return r ? JSON.parse(r) : null; } catch(e) { return null; }
+}
+function saveEntry(key, data) {
+  try { localStorage.setItem('ck_entry_'+key, JSON.stringify(data)); return true; } catch(e) { return false; }
+}
+function loadGarden() {
+  try {
+    const raw = localStorage.getItem('ck_garden');
+    if (raw) { const d = JSON.parse(raw); if (d.length === zones.length) return d; }
+  } catch(e) {}
+  return zones.map(() => Array(7).fill(false));
+}
+function saveGarden() {
+  try { localStorage.setItem('ck_garden', JSON.stringify(gardenData)); } catch(e) {}
+}
 
-function seeded(seed, max) { const x = Math.sin(seed)*10000; return Math.floor((x-Math.floor(x))*max); }
-const S = today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate();
-
-// Morning quote + fact seeded by date
-const q = quotes[seeded(S, quotes.length)];
-document.getElementById('daily-quote').textContent = `"${q.text}"`;
-document.getElementById('daily-attr').textContent  = `— ${q.attr}`;
-document.getElementById('daily-fact').textContent  = facts[seeded(S+1, facts.length)];
-
-// Evening reflection seeded by date but offset so it differs from morning
-document.getElementById('reflection-prompt').textContent = eveningPrompts[seeded(S+7, eveningPrompts.length)];
-
-// ── ZONE STATE ────────────────────────────────────────
+// ── GLOBAL STATE ─────────────────────────────────────
 let zoneStatus = {};
 zones.forEach(z => zoneStatus[z.name] = null);
-
-const saved = loadEntry(todayKey);
-if (saved) {
-  if (saved.zoneStatus)  zoneStatus = {...zoneStatus, ...saved.zoneStatus};
-  if (saved.intention)   document.getElementById('intention-input').value = saved.intention;
-  if (saved.reflection)  document.getElementById('reflection-input').value = saved.reflection;
-  if (saved.vibe) {
-    document.querySelectorAll('.vibe-btn').forEach(b => {
-      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(saved.vibe)) b.classList.add('selected');
-    });
-    selectedVibe = saved.vibe;
-  }
-}
-renderZones();
-
-function renderZones() {
-  ['good','progress','help'].forEach(status => {
-    const assigned = zones.filter(z => zoneStatus[z.name] === status);
-    const drop = document.getElementById('drop-'+status);
-    drop.innerHTML = '';
-    assigned.forEach(z => {
-      const chip = document.createElement('div');
-      chip.className = 'zone-chip';
-      chip.innerHTML = `
-        <div>
-          <div class="zone-chip-name">${z.name}</div>
-          <div class="zone-chip-sub">${z.sub}</div>
-        </div>
-        <div class="zone-chip-remove">✕</div>`;
-      chip.querySelector('.zone-chip-remove').addEventListener('click', () => removeZone(z.name));
-      drop.appendChild(chip);
-    });
-    document.getElementById('count-'+status).textContent = assigned.length + (assigned.length===1?' zone':' zones');
-    const hdr = document.querySelector('#grp-'+status+' .status-header');
-    hdr.className = 'status-header' + (assigned.length > 0 ? ' '+status : '');
-  });
-
-  const unassigned = zones.filter(z => !zoneStatus[z.name]);
-  const ul = document.getElementById('unassigned-list');
-  ul.innerHTML = '';
-  unassigned.forEach(z => {
-    const div = document.createElement('div');
-    div.className = 'unassigned-zone';
-    div.innerHTML = `
-      <div>
-        <div class="unassigned-zone-name">${z.name}</div>
-        <div class="unassigned-zone-sub">${z.sub}</div>
-      </div>
-      <div class="assign-btns">
-        <button class="assign-btn g">✓</button>
-        <button class="assign-btn p">~</button>
-        <button class="assign-btn h">!</button>
-      </div>`;
-    div.querySelector('.assign-btn.g').addEventListener('click', () => assignZone(z.name, 'good'));
-    div.querySelector('.assign-btn.p').addEventListener('click', () => assignZone(z.name, 'progress'));
-    div.querySelector('.assign-btn.h').addEventListener('click', () => assignZone(z.name, 'help'));
-    ul.appendChild(div);
-  });
-}
-
-function assignZone(name, status) {
-  zoneStatus[name] = status;
-  if (status === 'good') tendGarden(zones.findIndex(z=>z.name===name));
-  renderZones();
-}
-function removeZone(name) { zoneStatus[name] = null; renderZones(); }
-function toggleGroup(id)  { document.getElementById('grp-'+id).classList.toggle('open'); }
-
-// ── VIBE ─────────────────────────────────────────────
 let selectedVibe = '';
+let currentFocus = 0;
+let gardenData = loadGarden();
+
+// ── GLOBAL INTERACTIVE FUNCTIONS ─────────────────────
+function toggleGroup(id) {
+  document.getElementById('grp-'+id).classList.toggle('open');
+}
 function selectVibe(el, vibe) {
   document.querySelectorAll('.vibe-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   selectedVibe = vibe;
 }
-
-// ── PM FOCUS ─────────────────────────────────────────
-let currentFocus = seeded(S+3, focusZones.length);
-updateFocus();
-function updateFocus() {
-  document.getElementById('focus-name').textContent = focusZones[currentFocus].name;
-  document.getElementById('focus-desc').textContent = focusZones[currentFocus].desc;
+function assignZone(name, status) {
+  zoneStatus[name] = status;
+  if (status === 'good') tendGarden(zones.findIndex(z => z.name === name));
+  renderZones();
 }
+function removeZone(name) { zoneStatus[name] = null; renderZones(); }
 function reroll() {
-  let n; do { n = Math.floor(Math.random()*focusZones.length); } while(n===currentFocus);
-  currentFocus = n; updateFocus();
+  let n;
+  do { n = Math.floor(Math.random() * focusZones.length); } while (n === currentFocus);
+  currentFocus = n;
+  updateFocus();
 }
-
-// ── CHECKLIST ────────────────────────────────────────
 function toggleCheck(el) { el.classList.toggle('done'); }
 function checkFocus(el) {
   el.classList.toggle('done');
@@ -680,8 +607,6 @@ function checkFocus(el) {
     showToast('🌿 ' + focusZones[currentFocus].name + ' tended');
   }
 }
-
-// ── SAVE ─────────────────────────────────────────────
 function saveDay() {
   const existing = loadEntry(todayKey) || {};
   const entry = {
@@ -695,7 +620,6 @@ function saveDay() {
   saveEntry(todayKey, entry);
   syncToSheets(entry);
 }
-
 function saveEvening() {
   const existing = loadEntry(todayKey) || {};
   const entry = {
@@ -711,143 +635,180 @@ function saveEvening() {
   saveEntry(todayKey, entry);
   syncToSheets(entry);
 }
-
-// ── STORAGE ──────────────────────────────────────────
-function loadEntry(key) {
-  try { const r = localStorage.getItem('ck_entry_'+key); return r ? JSON.parse(r) : null; } catch(e) { return null; }
-}
-function saveEntry(key, data) {
-  try { localStorage.setItem('ck_entry_'+key, JSON.stringify(data)); return true; } catch(e) { return false; }
-}
-
-function syncToSheets(entry) {
-  showToast('✦ Saving to Château Kay…');
-
-  // Build zone lists
-  const lookingGood = [], inProgress = [], needsHelp = [];
-  if (entry.zoneStatus) {
-    Object.entries(entry.zoneStatus).forEach(([name, status]) => {
-      if (status === 'good') lookingGood.push(name);
-      else if (status === 'progress') inProgress.push(name);
-      else if (status === 'help') needsHelp.push(name);
-    });
-  }
-
-  // Build garden today - which zones were tended today
-  const todayIdx = new Date().getDay();
-  const gardenToday = zones
-    .filter((z, zi) => gardenData[zi] && gardenData[zi][todayIdx])
-    .map(z => z.name)
-    .join(', ') || 'None yet';
-
-  const vibeMap = {
-    'flowstate': '🌊 Flowstate — mind clear, body good, heart open',
-    'showing-up': '🌤 Showing Up — not peak, but present',
-    'being-gentle': '🌧 Being Gentle — grace, not grind',
-    '': 'Not checked in'
-  };
-
-  const payload = {
-    date: entry.displayDate || entry.date,
-    dayOfYear: dayOfYear,
-    vibe: vibeMap[entry.vibe || ''],
-    intention: entry.intention || '',
-    focusZone: entry.focusZone || focusZones[currentFocus].name,
-    focusCompleted: entry.focusCompleted ? 'Yes ✓' : 'Not yet',
-    rewearChecked: entry.rewearChecked ? 'Yes ✓' : 'Not yet',
-    reflectionPrompt: entry.reflectionPrompt || document.getElementById('reflection-prompt').textContent,
-    reflection: entry.reflection || '',
-    lookingGood: lookingGood.join(', ') || 'None assigned',
-    inProgress: inProgress.join(', ') || 'None assigned',
-    needsHelp: needsHelp.join(', ') || 'None assigned',
-    gardenToday: gardenToday,
-    savedAt: new Date().toLocaleTimeString(),
-  };
-
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
-  .then(() => {
-    showToast('✦ Saved to Château Kay ✓');
-  })
-  .catch(() => {
-    showToast('⚠ Saved locally — check connection');
-  });
-}
-
-// ── TOAST ────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-}
-
-// ── GARDEN ───────────────────────────────────────────
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0LJ7KirLReGIUe0kVZKYBLovJFF4W7-nVSD1kcBXhIyPrs1quNTFkuxyyERbSdLwZog/exec';
-let gardenData = loadGarden();
-
-function loadGarden() {
-  try {
-    const raw = localStorage.getItem('ck_garden');
-    if (raw) { const d = JSON.parse(raw); if (d.length===zones.length) return d; }
-  } catch(e) {}
-  return zones.map(() => Array(7).fill(false));
-}
-function saveGarden() { try { localStorage.setItem('ck_garden', JSON.stringify(gardenData)); } catch(e) {} }
-
-function tendGarden(zi) {
-  if (zi < 0) return;
-  gardenData[zi][today.getDay()] = true;
-  saveGarden(); renderGarden();
-}
-
-function renderGarden() {
-  const todayIdx = today.getDay();
-  let html = '<thead><tr><th></th>';
-  DAYS_SHORT.forEach((d,i) => {
-    html += `<th style="${i===todayIdx?'color:#b8963e':''}">${d}</th>`;
-  });
-  html += '</tr></thead><tbody>';
-  zones.forEach((z,zi) => {
-    html += `<tr><td class="g-zone-label">${z.name.replace('Closet — ','↳ ').replace('Bathroom ','Bath ')}</td>`;
-    DAYS_SHORT.forEach((_,di) => {
-      const tended  = gardenData[zi]&&gardenData[zi][di];
-      const isToday = di===todayIdx;
-      html += `<td><div class="garden-cell ${tended?'tended':''} ${isToday?'today':''}" onclick="toggleGarden(${zi},${di})">${tended?'🌿':''}</div></td>`;
-    });
-    html += '</tr>';
-  });
-  html += '</tbody>';
-  document.getElementById('garden-table').innerHTML = html;
-
-  const total = gardenData.flat().filter(Boolean).length;
-  const pct   = Math.round((total/(zones.length*7))*100);
-  document.getElementById('week-summary').textContent =
-    total===0 ? 'The garden is waiting for your care.' :
-    pct<20    ? 'A few tender beginnings. Keep going.' :
-    pct<40    ? 'The garden is waking up, slowly and surely.' :
-    pct<60    ? "Real care, real momentum. You're tending well." :
-    pct<80    ? 'Look at all of this. A sanctuary in bloom.' :
-                'Château Kay is fully tended. You did this. 🌸';
-}
-
 function toggleGarden(zi, di) {
   gardenData[zi][di] = !gardenData[zi][di];
   saveGarden(); renderGarden();
 }
-
 function resetGarden() {
   if (confirm('Begin a new week? This will clear the current garden.')) {
     gardenData = zones.map(() => Array(7).fill(false));
     saveGarden(); renderGarden();
   }
 }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
 
-renderGarden();
-}); // end DOMContentLoaded
+// ── RENDER FUNCTIONS (global) ─────────────────────────
+function renderZones() {
+  ['good','progress','help'].forEach(status => {
+    const assigned = zones.filter(z => zoneStatus[z.name] === status);
+    const drop = document.getElementById('drop-'+status);
+    drop.innerHTML = '';
+    assigned.forEach(z => {
+      const chip = document.createElement('div');
+      chip.className = 'zone-chip';
+      chip.innerHTML = '<div><div class="zone-chip-name">'+z.name+'</div><div class="zone-chip-sub">'+z.sub+'</div></div><div class="zone-chip-remove">&#x2715;</div>';
+      chip.querySelector('.zone-chip-remove').addEventListener('click', function() { removeZone(z.name); });
+      drop.appendChild(chip);
+    });
+    document.getElementById('count-'+status).textContent = assigned.length + (assigned.length===1?' zone':' zones');
+    const hdr = document.querySelector('#grp-'+status+' .status-header');
+    hdr.className = 'status-header' + (assigned.length > 0 ? ' '+status : '');
+  });
+
+  const ul = document.getElementById('unassigned-list');
+  ul.innerHTML = '';
+  zones.filter(z => !zoneStatus[z.name]).forEach(z => {
+    const div = document.createElement('div');
+    div.className = 'unassigned-zone';
+    div.innerHTML = '<div><div class="unassigned-zone-name">'+z.name+'</div><div class="unassigned-zone-sub">'+z.sub+'</div></div><div class="assign-btns"><button class="assign-btn g">&#x2713;</button><button class="assign-btn p">~</button><button class="assign-btn h">!</button></div>';
+    div.querySelector('.assign-btn.g').addEventListener('click', function() { assignZone(z.name,'good'); });
+    div.querySelector('.assign-btn.p').addEventListener('click', function() { assignZone(z.name,'progress'); });
+    div.querySelector('.assign-btn.h').addEventListener('click', function() { assignZone(z.name,'help'); });
+    ul.appendChild(div);
+  });
+}
+
+function updateFocus() {
+  document.getElementById('focus-name').textContent = focusZones[currentFocus].name;
+  document.getElementById('focus-desc').textContent = focusZones[currentFocus].desc;
+}
+
+function tendGarden(zi) {
+  if (zi < 0) return;
+  const today = new Date();
+  gardenData[zi][today.getDay()] = true;
+  saveGarden(); renderGarden();
+}
+
+function renderGarden() {
+  const today = new Date();
+  const todayIdx = today.getDay();
+  const table = document.getElementById('garden-table');
+  let html = '<thead><tr><th></th>';
+  DAYS_SHORT.forEach((d,i) => {
+    html += '<th style="'+(i===todayIdx?'color:#b8963e':'')+'">' + d + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+  zones.forEach((z,zi) => {
+    html += '<tr><td class="g-zone-label">' + z.name.replace('Closet \u2014 ','\u21b3 ').replace('Bathroom ','Bath ') + '</td>';
+    DAYS_SHORT.forEach((_,di) => {
+      const tended  = gardenData[zi] && gardenData[zi][di];
+      const isToday = di === todayIdx;
+      html += '<td><div class="garden-cell'+(tended?' tended':'')+(isToday?' today':'')+'" onclick="toggleGarden('+zi+','+di+')">'+(tended?'🌿':'')+'</div></td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+  const total = gardenData.flat().filter(Boolean).length;
+  const pct = Math.round((total/(zones.length*7))*100);
+  document.getElementById('week-summary').textContent =
+    total===0 ? 'The garden is waiting for your care.' :
+    pct<20    ? 'A few tender beginnings. Keep going.' :
+    pct<40    ? 'The garden is waking up, slowly and surely.' :
+    pct<60    ? 'Real care, real momentum. You are tending well.' :
+    pct<80    ? 'Look at all of this. A sanctuary in bloom.' :
+                'Chateau Kay is fully tended. You did this. 🌸';
+}
+
+function syncToSheets(entry) {
+  showToast('Saving to Chateau Kay...');
+  const today = new Date();
+  const todayIdx = today.getDay();
+  const lookingGood = [], inProgress = [], needsHelp = [];
+  if (entry.zoneStatus) {
+    Object.entries(entry.zoneStatus).forEach(function(kv) {
+      if (kv[1] === 'good') lookingGood.push(kv[0]);
+      else if (kv[1] === 'progress') inProgress.push(kv[0]);
+      else if (kv[1] === 'help') needsHelp.push(kv[0]);
+    });
+  }
+  const gardenToday = zones.filter(function(z,zi) { return gardenData[zi] && gardenData[zi][todayIdx]; }).map(function(z) { return z.name; }).join(', ') || 'None yet';
+  const vibeMap = {'flowstate':'Flowstate — mind clear, body good, heart open','showing-up':'Showing Up — not peak, but present','being-gentle':'Being Gentle — grace, not grind','':'Not checked in'};
+  const dayOfYear = Math.ceil((today - new Date(today.getFullYear(),0,1))/86400000);
+  const payload = {
+    date: entry.displayDate || entry.date,
+    dayOfYear: dayOfYear,
+    vibe: vibeMap[entry.vibe || ''],
+    intention: entry.intention || '',
+    focusZone: entry.focusZone || focusZones[currentFocus].name,
+    focusCompleted: entry.focusCompleted ? 'Yes' : 'Not yet',
+    rewearChecked: entry.rewearChecked ? 'Yes' : 'Not yet',
+    reflectionPrompt: entry.reflectionPrompt || document.getElementById('reflection-prompt').textContent,
+    reflection: entry.reflection || '',
+    lookingGood: lookingGood.join(', ') || 'None assigned',
+    inProgress: inProgress.join(', ') || 'None assigned',
+    needsHelp: needsHelp.join(', ') || 'None assigned',
+    gardenToday: gardenToday,
+    savedAt: today.toLocaleTimeString(),
+  };
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload),
+  }).then(function() {
+    showToast('Saved to Chateau Kay');
+  }).catch(function() {
+    showToast('Saved locally — check connection');
+  });
+}
+
+// ── GLOBAL DATE/KEY (needed by save functions) ────────
+const _today = new Date();
+const todayKey = _today.getFullYear()+'-'+String(_today.getMonth()+1).padStart(2,'0')+'-'+String(_today.getDate()).padStart(2,'0');
+
+// ── INIT (runs after DOM ready) ───────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date();
+  const DAYS_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dayOfYear = Math.ceil((today - new Date(today.getFullYear(),0,1))/86400000);
+
+  document.getElementById('date-main').textContent = DAYS_LONG[today.getDay()] + ', ' + MONTHS[today.getMonth()] + ' ' + today.getDate();
+  document.getElementById('date-sub').textContent = today.getFullYear() + ' \u00b7 day ' + dayOfYear + ' of 365';
+
+  const S = today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate();
+  const q = quotes[seeded(S, quotes.length)];
+  document.getElementById('daily-quote').textContent = '"' + q.text + '"';
+  document.getElementById('daily-attr').textContent = '— ' + q.attr;
+  document.getElementById('daily-fact').textContent = facts[seeded(S+1, facts.length)];
+  document.getElementById('reflection-prompt').textContent = eveningPrompts[seeded(S+7, eveningPrompts.length)];
+
+  currentFocus = seeded(S+3, focusZones.length);
+  updateFocus();
+
+  // Restore saved state
+  const saved = loadEntry(todayKey);
+  if (saved) {
+    if (saved.zoneStatus) zoneStatus = Object.assign({}, zoneStatus, saved.zoneStatus);
+    if (saved.intention) document.getElementById('intention-input').value = saved.intention;
+    if (saved.reflection) document.getElementById('reflection-input').value = saved.reflection;
+    if (saved.vibe) {
+      selectedVibe = saved.vibe;
+      document.querySelectorAll('.vibe-btn').forEach(function(b) {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').indexOf(saved.vibe) > -1) b.classList.add('selected');
+      });
+    }
+  }
+
+  renderZones();
+  renderGarden();
+});
 </script>
 </body>
 </html>
