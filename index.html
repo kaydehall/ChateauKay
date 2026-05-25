@@ -668,28 +668,32 @@ function checkFocus(el) {
 // ── SAVE ─────────────────────────────────────────────
 function saveDay() {
   const existing = loadEntry(todayKey) || {};
-  const ok = saveEntry(todayKey, {
+  const entry = {
     ...existing,
     date: todayKey,
     displayDate: document.getElementById('date-main').textContent,
     vibe: selectedVibe,
     zoneStatus: {...zoneStatus},
     intention: document.getElementById('intention-input').value,
-  });
-  showToast(ok ? '✦ Morning anchored' : '⚠ Could not save — try again');
+  };
+  saveEntry(todayKey, entry);
+  syncToSheets(entry);
 }
 
 function saveEvening() {
   const existing = loadEntry(todayKey) || {};
-  const ok = saveEntry(todayKey, {
+  const entry = {
     ...existing,
     date: todayKey,
     displayDate: document.getElementById('date-main').textContent,
     reflection: document.getElementById('reflection-input').value,
     focusZone: focusZones[currentFocus].name,
     reflectionPrompt: document.getElementById('reflection-prompt').textContent,
-  });
-  showToast(ok ? '✦ Return complete — you did enough' : '⚠ Could not save — try again');
+    focusCompleted: document.getElementById('check-focus').classList.contains('done'),
+    rewearChecked: document.querySelectorAll('.check-item.done').length > 1,
+  };
+  saveEntry(todayKey, entry);
+  syncToSheets(entry);
 }
 
 // ── STORAGE ──────────────────────────────────────────
@@ -700,6 +704,64 @@ function saveEntry(key, data) {
   try { localStorage.setItem('ck_entry_'+key, JSON.stringify(data)); return true; } catch(e) { return false; }
 }
 
+function syncToSheets(entry) {
+  showToast('✦ Saving to Château Kay…');
+
+  // Build zone lists
+  const lookingGood = [], inProgress = [], needsHelp = [];
+  if (entry.zoneStatus) {
+    Object.entries(entry.zoneStatus).forEach(([name, status]) => {
+      if (status === 'good') lookingGood.push(name);
+      else if (status === 'progress') inProgress.push(name);
+      else if (status === 'help') needsHelp.push(name);
+    });
+  }
+
+  // Build garden today - which zones were tended today
+  const todayIdx = new Date().getDay();
+  const gardenToday = zones
+    .filter((z, zi) => gardenData[zi] && gardenData[zi][todayIdx])
+    .map(z => z.name)
+    .join(', ') || 'None yet';
+
+  const vibeMap = {
+    'flowstate': '🌊 Flowstate — mind clear, body good, heart open',
+    'showing-up': '🌤 Showing Up — not peak, but present',
+    'being-gentle': '🌧 Being Gentle — grace, not grind',
+    '': 'Not checked in'
+  };
+
+  const payload = {
+    date: entry.displayDate || entry.date,
+    dayOfYear: dayOfYear,
+    vibe: vibeMap[entry.vibe || ''],
+    intention: entry.intention || '',
+    focusZone: entry.focusZone || focusZones[currentFocus].name,
+    focusCompleted: entry.focusCompleted ? 'Yes ✓' : 'Not yet',
+    rewearChecked: entry.rewearChecked ? 'Yes ✓' : 'Not yet',
+    reflectionPrompt: entry.reflectionPrompt || document.getElementById('reflection-prompt').textContent,
+    reflection: entry.reflection || '',
+    lookingGood: lookingGood.join(', ') || 'None assigned',
+    inProgress: inProgress.join(', ') || 'None assigned',
+    needsHelp: needsHelp.join(', ') || 'None assigned',
+    gardenToday: gardenToday,
+    savedAt: new Date().toLocaleTimeString(),
+  };
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  .then(() => {
+    showToast('✦ Saved to Château Kay ✓');
+  })
+  .catch(() => {
+    showToast('⚠ Saved locally — check connection');
+  });
+}
+
 // ── TOAST ────────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -708,6 +770,7 @@ function showToast(msg) {
 }
 
 // ── GARDEN ───────────────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0LJ7KirLReGIUe0kVZKYBLovJFF4W7-nVSD1kcBXhIyPrs1quNTFkuxyyERbSdLwZog/exec';
 let gardenData = loadGarden();
 
 function loadGarden() {
