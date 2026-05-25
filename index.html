@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Château Kay</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender:   #c9bfe0;
+    --lilac:      #c4a8cc;
+    --wisteria:   #9b84b8;
+    --mauve:      #b89aaa;
+    --amethyst:   #6b5490;
+    --plum:       #3d2654;
+
+    --bg:         #f5f0fa;
+    --bg2:        #ede6f5;
+    --cream:      #fdfbff;
+    --card-border:rgba(180,160,210,0.25);
+
+    --text:       var(--plum);
+    --text-mid:   #7a6490;
+    --text-light: #b0a0c0;
+
+    --gold:       #b8963e;
+    --gold-dim:   rgba(184,150,62,0.18);
+
+    --green:      #5a8a6a;
+    --green-bg:   rgba(90,138,106,0.12);
+    --yellow:     #9a883a;
+    --yellow-bg:  rgba(154,136,58,0.12);
+    --red:        #9a5a6a;
+    --red-bg:     rgba(154,90,106,0.12);
+
+    --radius:     14px;
+    --shadow:     0 2px 20px rgba(61,38,84,0.07);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  body::before {
+    content:'';
+    position:fixed; top:0;left:0;right:0; height:400px;
+    background: linear-gradient(160deg, #e8dff5 0%, #ede6f8 35%, #f5f0fa 100%);
+    z-index:0; pointer-events:none;
+  }
+
+  .page { max-width:480px; margin:0 auto; padding:0 18px 40px; position:relative; z-index:1; }
+
+  /* ── HEADER ── */
+  .header { text-align:center; padding:44px 0 24px; }
+  .eyebrow { font-size:9px; letter-spacing:6px; text-transform:uppercase; color:var(--wisteria); font-weight:500; margin-bottom:10px; }
+  .title {
+    font-family:'Cormorant Garamond',serif; font-size:50px; font-weight:300;
+    color:var(--plum); line-height:1; margin-bottom:6px;
+    background: linear-gradient(135deg, var(--plum) 0%, var(--amethyst) 60%, var(--wisteria) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .tagline {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:14px; color:var(--text-light); letter-spacing:1px; margin-bottom:10px;
+  }
+  .date-line { font-size:10px; letter-spacing:2px; color:var(--text-light); text-transform:uppercase; margin-bottom:2px; }
+  .day-count { font-size:9px; color:var(--text-light); letter-spacing:1px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--card-border);
+  }
+  .card-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--wisteria); font-weight:500; margin-bottom:12px; }
+
+  /* ── FACT ── */
+  .fact-card {
+    background: linear-gradient(135deg, #ede6f8 0%, #f3eefb 100%);
+    border: 1px solid var(--lavender);
+    border-left: 3px solid var(--lilac);
+    border-radius: var(--radius);
+    padding: 16px 18px; margin-bottom: 12px;
+  }
+  .fact-label { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--lilac); margin-bottom:6px; }
+  .fact-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; line-height:1.65; color:var(--amethyst); }
+
+  /* ── QUOTE ── */
+  .quote-card {
+    background: linear-gradient(135deg, #f3eefb 0%, #ede6f8 100%);
+    border: 1px solid var(--lavender);
+    border-left: 3px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 20px 22px; margin-bottom: 12px;
+  }
+  .quote-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; line-height:1.65; color:var(--plum); margin-bottom:10px; }
+  .quote-attr { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); }
+
+  /* ── VIBE ── */
+  .vibe-row { display:flex; gap:8px; }
+  .vibe-btn {
+    flex:1; padding:14px 4px 12px;
+    border:1.5px solid var(--lavender);
+    border-radius:12px; background:var(--cream);
+    color:var(--text-light); font-family:'Jost',sans-serif;
+    font-size:8px; cursor:pointer; transition:all 0.2s; text-align:center; line-height:1.5;
+  }
+  .vibe-btn .v-icon { display:block; font-size:22px; margin-bottom:5px; }
+  .vibe-btn .v-label { display:block; font-weight:500; font-size:9px; letter-spacing:1px; color:var(--text-mid); margin-bottom:2px; }
+  .vibe-btn .v-sub { display:block; font-size:7.5px; color:var(--text-light); line-height:1.4; }
+  .vibe-btn.selected { border-color:var(--wisteria); background:rgba(155,132,184,0.1); }
+  .vibe-btn.selected .v-label { color:var(--amethyst); }
+
+  /* ── DIVIDER ── */
+  .divider { display:flex; align-items:center; gap:10px; margin:28px 0 16px; }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--lavender); }
+  .divider span { font-size:8px; color:var(--wisteria); letter-spacing:3px; text-transform:uppercase; white-space:nowrap; }
+
+  /* ── ZONE STATUS ── */
+  .status-group { margin-bottom:7px; border-radius:10px; overflow:hidden; border:1.5px solid var(--lavender); }
+  .status-header { display:flex; align-items:center; gap:10px; padding:13px 16px; cursor:pointer; background:var(--cream); user-select:none; transition:background 0.2s; }
+  .status-header.good { background:var(--green-bg); border-left:3px solid var(--green); }
+  .status-header.progress { background:var(--yellow-bg); border-left:3px solid var(--yellow); }
+  .status-header.help { background:var(--red-bg); border-left:3px solid var(--red); }
+  .status-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .status-dot.good { background:var(--green); }
+  .status-dot.progress { background:var(--yellow); }
+  .status-dot.help { background:var(--red); }
+  .status-dot.none { background:var(--lavender); }
+  .status-title { flex:1; font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--plum); }
+  .status-header.good .status-title { color:var(--green); }
+  .status-header.progress .status-title { color:var(--yellow); }
+  .status-header.help .status-title { color:var(--red); }
+  .status-count { font-size:9px; color:var(--text-light); letter-spacing:1px; }
+  .status-arrow { font-size:10px; color:var(--text-light); transition:transform 0.2s; }
+  .status-group.open .status-arrow { transform:rotate(180deg); }
+  .zone-dropdown { display:none; border-top:1px solid var(--lavender); background:rgba(245,240,250,0.8); }
+  .status-group.open .zone-dropdown { display:block; }
+  .zone-chip { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid rgba(200,185,220,0.2); }
+  .zone-chip:last-child { border-bottom:none; }
+  .zone-chip-name { font-family:'Cormorant Garamond',serif; font-size:16px; color:var(--plum); }
+  .zone-chip-sub { font-size:8px; color:var(--text-light); margin-top:1px; }
+  .zone-chip-remove { font-size:10px; color:var(--text-light); padding:4px 8px; cursor:pointer; }
+  .unassigned-list { display:flex; flex-direction:column; gap:6px; }
+  .unassigned-zone { display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--cream); border:1.5px solid var(--lavender); border-radius:8px; }
+  .unassigned-zone-name { font-family:'Cormorant Garamond',serif; font-size:16px; color:var(--plum); }
+  .unassigned-zone-sub { font-size:8px; color:var(--text-light); margin-top:1px; }
+  .assign-btns { display:flex; gap:5px; }
+  .assign-btn { padding:5px 9px; border-radius:20px; border:none; font-size:8px; font-family:'Jost',sans-serif; font-weight:500; cursor:pointer; transition:all 0.15s; }
+  .assign-btn.g { background:var(--green-bg); color:var(--green); border:1px solid var(--green); }
+  .assign-btn.p { background:var(--yellow-bg); color:var(--yellow); border:1px solid var(--yellow); }
+  .assign-btn.h { background:var(--red-bg); color:var(--red); border:1px solid var(--red); }
+
+  /* ── INTENTION ── */
+  .intention-input { width:100%; background:transparent; border:none; outline:none; color:var(--plum); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; line-height:1.7; resize:none; min-height:60px; }
+  .intention-input::placeholder { color:var(--text-light); }
+
+  /* ── SAVE ── */
+  .save-btn {
+    display:block; width:100%; padding:14px;
+    background:linear-gradient(135deg, var(--wisteria) 0%, var(--amethyst) 100%);
+    border:none; border-radius:12px; color:white;
+    font-family:'Jost',sans-serif; font-size:10px; font-weight:500;
+    letter-spacing:3px; text-transform:uppercase; cursor:pointer;
+    margin-top:14px; box-shadow:0 4px 16px rgba(107,84,144,0.25);
+    transition:opacity 0.2s;
+  }
+  .save-btn.evening {
+    background:linear-gradient(135deg, var(--mauve) 0%, var(--amethyst) 100%);
+    box-shadow:0 4px 16px rgba(184,154,170,0.25);
+  }
+  .save-btn:active { opacity:0.85; }
+
+  /* ── EVENING ── */
+  .evening-intro {
+    text-align:center;
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:16px; color:var(--text-mid); line-height:1.8;
+    padding:8px 10px 4px;
+  }
+
+  .focus-card {
+    background: linear-gradient(135deg, #f0eaf8 0%, #e8dff5 100%);
+    border:1.5px solid var(--lavender);
+    border-radius:var(--radius); padding:24px 20px 20px;
+    text-align:center; margin-bottom:10px;
+  }
+  .focus-eyebrow { font-size:8px; letter-spacing:4px; text-transform:uppercase; color:var(--wisteria); margin-bottom:10px; }
+  .focus-name { font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:300; color:var(--plum); margin-bottom:8px; line-height:1.1; }
+  .focus-desc { font-size:11px; color:var(--text-mid); line-height:1.7; }
+
+  .reroll-btn { display:block; width:100%; padding:11px; background:transparent; border:1.5px solid var(--lavender); border-radius:8px; color:var(--text-light); font-family:'Jost',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; margin-bottom:14px; transition:all 0.2s; }
+  .reroll-btn:active { border-color:var(--wisteria); color:var(--wisteria); }
+
+  /* ── CHECKLIST ── */
+  .check-list { display:flex; flex-direction:column; gap:8px; }
+  .check-item { display:flex; align-items:center; gap:12px; padding:14px 16px; background:var(--cream); border:1.5px solid var(--lavender); border-radius:10px; cursor:pointer; transition:all 0.2s; user-select:none; }
+  .check-item.done { border-color:var(--wisteria); background:rgba(155,132,184,0.08); }
+  .check-box { width:20px; height:20px; border:1.5px solid var(--lavender); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:10px; transition:all 0.2s; color:transparent; background:var(--bg); }
+  .check-item.done .check-box { border-color:var(--wisteria); background:var(--wisteria); color:white; }
+  .check-label { font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--plum); }
+  .check-sub { font-size:8px; color:var(--text-light); margin-top:2px; }
+  .check-item.done .check-label { color:var(--amethyst); }
+
+  /* ── REFLECTION ── */
+  .reflection-prompt { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:var(--amethyst); margin-bottom:12px; line-height:1.65; }
+  .reflection-input { width:100%; background:transparent; border:none; outline:none; color:var(--plum); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; line-height:1.7; resize:none; min-height:80px; }
+  .reflection-input::placeholder { color:var(--text-light); }
+
+  /* ── RETURN SIGNAL ── */
+  .return-signal {
+    text-align:center; padding:28px 24px;
+    background: linear-gradient(135deg, #f0eaf8 0%, #e8e0f5 100%);
+    border-radius:var(--radius); border:1px solid var(--lavender);
+    margin-top:4px;
+  }
+  .return-signal-label { font-size:8px; letter-spacing:4px; text-transform:uppercase; color:var(--wisteria); margin-bottom:14px; }
+  .return-signal-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; line-height:2.4; color:var(--amethyst); }
+
+  /* ── GARDEN ── */
+  .garden-intro { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:var(--text-mid); line-height:1.6; margin-bottom:16px; }
+  .garden-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .garden-table { border-collapse:separate; border-spacing:3px; min-width:100%; }
+  .garden-table th { font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--text-light); font-weight:500; padding:4px 2px; text-align:center; }
+  .garden-table td { text-align:center; padding:1px; }
+  .g-zone-label { font-size:8px; color:var(--text-mid); text-align:left !important; padding-right:6px !important; white-space:nowrap; font-family:'Jost',sans-serif; }
+  .garden-cell { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--lavender); background:var(--bg2); cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; margin:0 auto; font-size:12px; }
+  .garden-cell.tended { background:var(--green-bg); border-color:var(--green); }
+  .garden-cell.today { border-color:var(--gold) !important; border-width:2px; }
+  .garden-legend { display:flex; gap:16px; align-items:center; justify-content:center; margin:10px 0; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:8px; color:var(--text-light); }
+  .legend-dot { width:12px; height:12px; border-radius:50%; border:1.5px solid var(--lavender); background:var(--bg2); }
+  .legend-dot.tended { background:var(--green-bg); border-color:var(--green); }
+  .week-summary { text-align:center; font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; color:var(--text-mid); margin:12px 0; }
+  .garden-reset { display:block; width:100%; margin-top:10px; padding:11px; background:transparent; border:1.5px solid var(--lavender); border-radius:8px; color:var(--text-light); font-family:'Jost',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; }
+
+  /* ── TOAST ── */
+  .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--amethyst); color:white; padding:12px 24px; border-radius:30px; font-size:10px; letter-spacing:2px; text-transform:uppercase; z-index:999; opacity:0; transition:opacity 0.3s; pointer-events:none; white-space:nowrap; box-shadow:0 4px 20px rgba(107,84,144,0.3); }
+  .toast.show { opacity:1; }
+
+  .footer { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--text-light); margin-top:40px; padding-top:24px; border-top:1px solid var(--lavender); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Personal Sanctuary</div>
+    <div class="title">Château Kay</div>
+    <div class="tagline">Gentle. Intentional. Flexible.</div>
+    <div class="date-line" id="date-main"></div>
+    <div class="day-count" id="date-sub"></div>
+  </div>
+
+  <!-- TIDBIT -->
+  <div class="fact-card">
+    <div class="fact-label">✦ Today's Tidbit</div>
+    <div class="fact-text" id="daily-fact"></div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-card">
+    <div class="quote-text" id="daily-quote"></div>
+    <div class="quote-attr" id="daily-attr"></div>
+  </div>
+
+  <!-- VIBE CHECK -->
+  <div class="card">
+    <div class="card-label">Morning Check-In</div>
+    <div class="vibe-row">
+      <button class="vibe-btn" onclick="selectVibe(this,'flowstate')">
+        <span class="v-icon">🌊</span>
+        <span class="v-label">Flowstate</span>
+        <span class="v-sub">mind clear, body good, heart open</span>
+      </button>
+      <button class="vibe-btn" onclick="selectVibe(this,'showing-up')">
+        <span class="v-icon">🌤</span>
+        <span class="v-label">Showing Up</span>
+        <span class="v-sub">not peak, but present</span>
+      </button>
+      <button class="vibe-btn" onclick="selectVibe(this,'being-gentle')">
+        <span class="v-icon">🌧</span>
+        <span class="v-label">Being Gentle</span>
+        <span class="v-sub">grace, not grind</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ZONE STATUS -->
+  <div class="card">
+    <div class="card-label">Morning Walk — Zone Status</div>
+
+    <div class="status-group" id="grp-good">
+      <div class="status-header" onclick="toggleGroup('good')">
+        <div class="status-dot good"></div>
+        <div class="status-title">Looking Good</div>
+        <div class="status-count" id="count-good">0 zones</div>
+        <div class="status-arrow">▾</div>
+      </div>
+      <div class="zone-dropdown" id="drop-good"></div>
+    </div>
+
+    <div class="status-group" id="grp-progress" style="margin-top:7px">
+      <div class="status-header" onclick="toggleGroup('progress')">
+        <div class="status-dot progress"></div>
+        <div class="status-title">In Progress</div>
+        <div class="status-count" id="count-progress">0 zones</div>
+        <div class="status-arrow">▾</div>
+      </div>
+      <div class="zone-dropdown" id="drop-progress"></div>
+    </div>
+
+    <div class="status-group" id="grp-help" style="margin-top:7px">
+      <div class="status-header" onclick="toggleGroup('help')">
+        <div class="status-dot help"></div>
+        <div class="status-title">Needs Help</div>
+        <div class="status-count" id="count-help">0 zones</div>
+        <div class="status-arrow">▾</div>
+      </div>
+      <div class="zone-dropdown" id="drop-help"></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div class="card-label" style="margin-bottom:8px">Unassigned</div>
+      <div class="unassigned-list" id="unassigned-list"></div>
+    </div>
+  </div>
+
+  <!-- INTENTION -->
+  <div class="card">
+    <div class="card-label">Today's Intention</div>
+    <textarea class="intention-input" id="intention-input" placeholder="What are you calling in today…" rows="3"></textarea>
+  </div>
+
+  <button class="save-btn" onclick="saveDay()">✦ Anchor the Morning</button>
+
+  <!-- EVENING -->
+  <div class="divider" style="margin-top:36px"><span>evening return</span></div>
+
+  <div class="evening-intro">
+    This is your return to yourself.<br>
+    Not a task to complete — a woman coming home.
+  </div>
+
+  <!-- FOCUS ZONE -->
+  <div style="margin-top:18px">
+    <div class="card-label" style="padding:0 2px 8px">One Space to Tend Tonight</div>
+    <div class="focus-card">
+      <div class="focus-eyebrow">Tonight you're tending</div>
+      <div class="focus-name" id="focus-name"></div>
+      <div class="focus-desc" id="focus-desc"></div>
+    </div>
+    <button class="reroll-btn" onclick="reroll()">↻ &nbsp; choose a different space</button>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="card">
+    <div class="card-label">Returning to Order</div>
+    <div class="check-list">
+      <div class="check-item" id="check-focus" onclick="checkFocus(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-label">Space tended with care</div>
+          <div class="check-sub">tonight's one zone — complete</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-label">Clothes given a home</div>
+          <div class="check-sub">worn pieces resting where they belong</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="card">
+    <div class="card-label">Evening Reflection</div>
+    <div class="reflection-prompt" id="reflection-prompt"></div>
+    <textarea class="reflection-input" id="reflection-input" placeholder="There's no wrong answer here…" rows="4"></textarea>
+  </div>
+
+  <button class="save-btn evening" onclick="saveEvening()">✦ Complete the Return</button>
+
+  <!-- RETURN SIGNAL -->
+  <div class="return-signal" style="margin-top:14px">
+    <div class="return-signal-label">Château Kay is at rest</div>
+    <div class="return-signal-text">
+      You tended your space.<br>
+      You tended yourself.<br>
+      That is enough.
+    </div>
+  </div>
+
+  <!-- GARDEN -->
+  <div class="divider" style="margin-top:36px"><span>the garden</span></div>
+  <div class="card">
+    <div class="garden-intro">Each column is a day this week. Tending tonight's space plants it here automatically. A record of every act of care.</div>
+    <div class="garden-scroll">
+      <table class="garden-table" id="garden-table"></table>
+    </div>
+    <div class="garden-legend">
+      <div class="legend-item"><div class="legend-dot"></div><span>untouched</span></div>
+      <div class="legend-item"><div class="legend-dot tended"></div><span>tended 🌿</span></div>
+    </div>
+    <div class="week-summary" id="week-summary"></div>
+    <button class="garden-reset" onclick="resetGarden()">↺ &nbsp; begin a new week</button>
+  </div>
+
+  <div class="footer">Château Kay — a sanctuary tended with intention 🤍</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+const zones = [
+  {name:"Floors",sub:"bedroom + bathroom"},
+  {name:"Jewelry",sub:"shelf + display"},
+  {name:"Nightstands",sub:"both sides"},
+  {name:"Makeup",sub:"vanity + organizer"},
+  {name:"TV Stand",sub:"surface + unit"},
+  {name:"Chest of Drawers",sub:"top + drawers closed"},
+  {name:"Office",sub:"desk + chair + cords"},
+  {name:"Closet — Hanging",sub:"shirts + skirts + dresses"},
+  {name:"Closet — Bags",sub:"cubbies + hooks"},
+  {name:"Closet — Hamper",sub:"contained, not overflowing"},
+  {name:"Closet — Shoes",sub:"floor clear"},
+  {name:"Shower",sub:"products in place"},
+  {name:"Sink",sub:"counter clear, drain clean"},
+  {name:"Bathroom Closet",sub:"towels + supplies"},
+];
+
+const focusZones = [
+  {name:"Floors",desc:"A clear path through your home. Nothing underfoot, nothing pulling at your attention."},
+  {name:"Jewelry",desc:"Edit the display. Untangle what needs untangling. Let what you love be visible."},
+  {name:"Nightstands",desc:"Clear both surfaces down to only what serves your rest. This is sacred sleep space."},
+  {name:"Makeup",desc:"Reset the vanity. Return each thing to its place. Let the space be ready for tomorrow's version of you."},
+  {name:"TV Stand",desc:"Clear the surface. Let the space breathe. Nothing here that doesn't belong."},
+  {name:"Chest of Drawers",desc:"Top surface clear. Every drawer fully closed. Contained and calm."},
+  {name:"Office",desc:"Your desk cleared, your chair free. Tomorrow's work begins in today's order."},
+  {name:"Closet — Hanging",desc:"Every piece on a hanger, facing the same direction. Your wardrobe, curated."},
+  {name:"Closet — Bags",desc:"Every bag in its home. Nothing piled, nothing searching for a place."},
+  {name:"Closet — Hamper",desc:"Contained. Not overflowing. What's worn is accounted for."},
+  {name:"Closet — Shoes",desc:"Every pair has a place. The floor of your closet is clear and intentional."},
+  {name:"Shower",desc:"Products returned to their place. The space wiped and ready. A clean start for tomorrow."},
+  {name:"Sink",desc:"The counter wiped clean. Mirror clear. A fresh surface for the woman who wakes up here."},
+  {name:"Bathroom Closet",desc:"Towels folded, supplies in order. Quiet abundance, well organized."},
+];
+
+const quotes = [
+  {text:"I am deliberate and afraid of nothing.",attr:"Audre Lorde"},
+  {text:"She remembered who she was and the game changed.",attr:"Lalah Delia"},
+  {text:"You are allowed to be both a masterpiece and a work in progress.",attr:"Sophia Bush"},
+  {text:"My alone feels so good, I'll only have you if you're sweeter than my solitude.",attr:"Warsan Shire"},
+  {text:"You are your best thing.",attr:"Toni Morrison"},
+  {text:"If you don't like the road you're walking, start paving another one.",attr:"Dolly Parton"},
+  {text:"The most courageous act is still to think for yourself. Aloud.",attr:"Coco Chanel"},
+  {text:"There is no limit to what we, as women, can accomplish.",attr:"Michelle Obama"},
+  {text:"I am not lucky. I am smart, I am talented, I take advantage of the opportunities that come my way.",attr:"Viola Davis"},
+  {text:"Step into the fire of self-discovery. This fire will not burn you, it will only burn what you are not.",attr:"Mooji"},
+  {text:"Your crown has been bought and paid for. Put it on your head and wear it.",attr:"Maya Angelou"},
+  {text:"A woman who knows what she brings to the table is not afraid to eat alone.",attr:"unknown"},
+  {text:"Owning our story and loving ourselves through that process is the bravest thing we'll ever do.",attr:"Brené Brown"},
+  {text:"She made broken look beautiful and strong look invincible.",attr:"Ariana Dancu"},
+  {text:"The woman who does not require validation from anyone is the most feared individual on the planet.",attr:"Mohadesa Najumi"},
+  {text:"Real change, enduring change, happens one step at a time.",attr:"Ruth Bader Ginsburg"},
+  {text:"Above all, be the heroine of your life, not the victim.",attr:"Nora Ephron"},
+  {text:"I had to make you uncomfortable, otherwise you never would have moved.",attr:"Universe"},
+  {text:"She decided to enjoy the simple luxury of being herself.",attr:"unknown"},
+  {text:"You are not a drop in the ocean. You are the entire ocean in a drop.",attr:"Rumi"},
+  {text:"I am not afraid of storms, for I am learning how to sail my ship.",attr:"Louisa May Alcott"},
+  {text:"I'm not going to be the woman who didn't try.",attr:"Viola Davis"},
+  {text:"Your life is your story. Write well. Edit often.",attr:"unknown"},
+  {text:"Refinement is not restriction. It is choosing with intention.",attr:"unknown"},
+  {text:"She is water. Powerful enough to drown you, soft enough to cleanse you.",attr:"unknown"},
+  {text:"A tidy space is a love letter to your future self.",attr:"unknown"},
+  {text:"Do the best you can until you know better. Then when you know better, do better.",attr:"Maya Angelou"},
+  {text:"She was never quite ready. But this was always how it happened.",attr:"Stephanie Perkins"},
+];
+
+const facts = [
+  "Honeybees can recognize human faces using the same technique humans do.",
+  "The Eiffel Tower grows about 6 inches taller in summer due to thermal expansion.",
+  "Octopuses have three hearts, blue blood, and can taste with their arms.",
+  "Cleopatra lived closer in time to the Moon landing than to the Great Pyramid's construction.",
+  "The average person walks the equivalent of five times around the Earth in their lifetime.",
+  "Crows can recognize and remember human faces — and hold grudges.",
+  "The smell of rain has a name: petrichor.",
+  "Butterflies taste with their feet.",
+  "A group of flamingos is called a flamboyance.",
+  "The Mona Lisa has no eyebrows — it was fashionable to shave them in Renaissance Florence.",
+  "Sea otters hold hands while sleeping so they don't drift apart.",
+  "Your brain generates enough electricity while awake to power a small lightbulb.",
+  "In Switzerland, it's illegal to own just one guinea pig — they get lonely.",
+  "The color orange was named after the fruit, not the other way around.",
+  "There's a species of jellyfish that is technically biologically immortal.",
+  "The dot over a lowercase i or j is called a tittle.",
+  "Bananas are curved because they grow toward the sun.",
+  "Honey never spoils — edible honey has been found in 3,000-year-old Egyptian tombs.",
+  "Your heart beats around 100,000 times a day.",
+  "Sleeping in a slightly cooler room can improve the quality of your dreams.",
+  "Humans are the only animals that blush.",
+  "The shortest war in history lasted 38 to 45 minutes.",
+  "More people have been to the Moon than to the bottom of the Mariana Trench.",
+  "The average person spends 6 months of their life waiting for red lights.",
+  "Coconuts kill more people than sharks every year.",
+  "A snail can sleep for up to three years.",
+  "Wombat poop is cube-shaped.",
+  "The hashtag symbol is technically called an octothorpe.",
+];
+
+const morningPrompts = [
+  "What are you calling in today?",
+  "What does today's version of you need most?",
+  "What would make today feel like a win, even a small one?",
+  "What are you choosing to release before this day begins?",
+  "What energy are you walking into today with?",
+  "What does your body need from you today?",
+  "Who are you becoming today?",
+];
+
+const eveningPrompts = [
+  "What part of your space made you feel most like yourself today?",
+  "Where did you feel most resistance today — in your space or in yourself?",
+  "What's one thing you're releasing tonight — physically or emotionally?",
+  "Did your space match your energy today? What would you change?",
+  "What does tomorrow's version of you need from your space?",
+  "Where did you show up for yourself today, even in a small way?",
+  "What felt heavy today? What felt light?",
+  "If your room were a reflection of your inner world right now, what would it say?",
+  "What's one thing you did today that future Kay will thank you for?",
+  "What were you avoiding today — and is that okay?",
+  "How did your body feel moving through your space today?",
+  "What moment today felt most aligned with the woman you're becoming?",
+  "What needs your attention tomorrow that you can release tonight?",
+  "Did you give yourself grace today? Where could you offer more?",
+  "What's one small act of care worth acknowledging before you sleep?",
+  "What would it look like to fully trust yourself tomorrow?",
+  "What energy are you choosing to wake up with?",
+  "What did your space teach you about yourself today?",
+  "How did you love yourself today, even imperfectly?",
+  "What's one thing that went better than expected?",
+  "Where did you find beauty today — in your space, your body, your life?",
+];
+
+// ── DATE + SEED ───────────────────────────────────────
+const today = new Date();
+const DAYS_LONG  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS     = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const todayKey   = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+const dayOfYear  = Math.ceil((today - new Date(today.getFullYear(),0,1))/86400000);
+
+document.getElementById('date-main').textContent = `${DAYS_LONG[today.getDay()]}, ${MONTHS[today.getMonth()]} ${today.getDate()}`;
+document.getElementById('date-sub').textContent   = `${today.getFullYear()} · day ${dayOfYear} of 365`;
+
+function seeded(seed, max) { const x = Math.sin(seed)*10000; return Math.floor((x-Math.floor(x))*max); }
+const S = today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate();
+
+// Morning quote + fact seeded by date
+const q = quotes[seeded(S, quotes.length)];
+document.getElementById('daily-quote').textContent = `"${q.text}"`;
+document.getElementById('daily-attr').textContent  = `— ${q.attr}`;
+document.getElementById('daily-fact').textContent  = facts[seeded(S+1, facts.length)];
+
+// Evening reflection seeded by date but offset so it differs from morning
+document.getElementById('reflection-prompt').textContent = eveningPrompts[seeded(S+7, eveningPrompts.length)];
+
+// ── ZONE STATE ────────────────────────────────────────
+let zoneStatus = {};
+zones.forEach(z => zoneStatus[z.name] = null);
+
+const saved = loadEntry(todayKey);
+if (saved) {
+  if (saved.zoneStatus)  zoneStatus = {...zoneStatus, ...saved.zoneStatus};
+  if (saved.intention)   document.getElementById('intention-input').value = saved.intention;
+  if (saved.reflection)  document.getElementById('reflection-input').value = saved.reflection;
+  if (saved.vibe) {
+    document.querySelectorAll('.vibe-btn').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(saved.vibe)) b.classList.add('selected');
+    });
+    selectedVibe = saved.vibe;
+  }
+}
+renderZones();
+
+function renderZones() {
+  ['good','progress','help'].forEach(status => {
+    const assigned = zones.filter(z => zoneStatus[z.name] === status);
+    document.getElementById('drop-'+status).innerHTML = assigned.map(z => `
+      <div class="zone-chip">
+        <div>
+          <div class="zone-chip-name">${z.name}</div>
+          <div class="zone-chip-sub">${z.sub}</div>
+        </div>
+        <div class="zone-chip-remove" onclick="removeZone('${z.name}')">✕</div>
+      </div>`).join('');
+    document.getElementById('count-'+status).textContent = assigned.length + (assigned.length===1?' zone':' zones');
+    const hdr = document.querySelector('#grp-'+status+' .status-header');
+    hdr.className = 'status-header' + (assigned.length > 0 ? ' '+status : '');
+  });
+
+  document.getElementById('unassigned-list').innerHTML = zones.filter(z => !zoneStatus[z.name]).map(z => `
+    <div class="unassigned-zone">
+      <div>
+        <div class="unassigned-zone-name">${z.name}</div>
+        <div class="unassigned-zone-sub">${z.sub}</div>
+      </div>
+      <div class="assign-btns">
+        <button class="assign-btn g" onclick="assignZone('${z.name}','good')">✓</button>
+        <button class="assign-btn p" onclick="assignZone('${z.name}','progress')">~</button>
+        <button class="assign-btn h" onclick="assignZone('${z.name}','help')">!</button>
+      </div>
+    </div>`).join('');
+}
+
+function assignZone(name, status) {
+  zoneStatus[name] = status;
+  if (status === 'good') tendGarden(zones.findIndex(z=>z.name===name));
+  renderZones();
+}
+function removeZone(name) { zoneStatus[name] = null; renderZones(); }
+function toggleGroup(id)  { document.getElementById('grp-'+id).classList.toggle('open'); }
+
+// ── VIBE ─────────────────────────────────────────────
+let selectedVibe = '';
+function selectVibe(el, vibe) {
+  document.querySelectorAll('.vibe-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedVibe = vibe;
+}
+
+// ── PM FOCUS ─────────────────────────────────────────
+let currentFocus = seeded(S+3, focusZones.length);
+updateFocus();
+function updateFocus() {
+  document.getElementById('focus-name').textContent = focusZones[currentFocus].name;
+  document.getElementById('focus-desc').textContent = focusZones[currentFocus].desc;
+}
+function reroll() {
+  let n; do { n = Math.floor(Math.random()*focusZones.length); } while(n===currentFocus);
+  currentFocus = n; updateFocus();
+}
+
+// ── CHECKLIST ────────────────────────────────────────
+function toggleCheck(el) { el.classList.toggle('done'); }
+function checkFocus(el) {
+  el.classList.toggle('done');
+  if (el.classList.contains('done')) {
+    tendGarden(zones.findIndex(z => z.name === focusZones[currentFocus].name));
+    showToast('🌿 ' + focusZones[currentFocus].name + ' tended');
+  }
+}
+
+// ── SAVE ─────────────────────────────────────────────
+function saveDay() {
+  const existing = loadEntry(todayKey) || {};
+  const ok = saveEntry(todayKey, {
+    ...existing,
+    date: todayKey,
+    displayDate: document.getElementById('date-main').textContent,
+    vibe: selectedVibe,
+    zoneStatus: {...zoneStatus},
+    intention: document.getElementById('intention-input').value,
+  });
+  showToast(ok ? '✦ Morning anchored' : '⚠ Could not save — try again');
+}
+
+function saveEvening() {
+  const existing = loadEntry(todayKey) || {};
+  const ok = saveEntry(todayKey, {
+    ...existing,
+    date: todayKey,
+    displayDate: document.getElementById('date-main').textContent,
+    reflection: document.getElementById('reflection-input').value,
+    focusZone: focusZones[currentFocus].name,
+    reflectionPrompt: document.getElementById('reflection-prompt').textContent,
+  });
+  showToast(ok ? '✦ Return complete — you did enough' : '⚠ Could not save — try again');
+}
+
+// ── STORAGE ──────────────────────────────────────────
+function loadEntry(key) {
+  try { const r = localStorage.getItem('ck_entry_'+key); return r ? JSON.parse(r) : null; } catch(e) { return null; }
+}
+function saveEntry(key, data) {
+  try { localStorage.setItem('ck_entry_'+key, JSON.stringify(data)); return true; } catch(e) { return false; }
+}
+
+// ── TOAST ────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── GARDEN ───────────────────────────────────────────
+let gardenData = loadGarden();
+
+function loadGarden() {
+  try {
+    const raw = localStorage.getItem('ck_garden');
+    if (raw) { const d = JSON.parse(raw); if (d.length===zones.length) return d; }
+  } catch(e) {}
+  return zones.map(() => Array(7).fill(false));
+}
+function saveGarden() { try { localStorage.setItem('ck_garden', JSON.stringify(gardenData)); } catch(e) {} }
+
+function tendGarden(zi) {
+  if (zi < 0) return;
+  gardenData[zi][today.getDay()] = true;
+  saveGarden(); renderGarden();
+}
+
+function renderGarden() {
+  const todayIdx = today.getDay();
+  let html = '<thead><tr><th></th>';
+  DAYS_SHORT.forEach((d,i) => {
+    html += `<th style="${i===todayIdx?'color:#b8963e':''}">${d}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+  zones.forEach((z,zi) => {
+    html += `<tr><td class="g-zone-label">${z.name.replace('Closet — ','↳ ').replace('Bathroom ','Bath ')}</td>`;
+    DAYS_SHORT.forEach((_,di) => {
+      const tended  = gardenData[zi]&&gardenData[zi][di];
+      const isToday = di===todayIdx;
+      html += `<td><div class="garden-cell ${tended?'tended':''} ${isToday?'today':''}" onclick="toggleGarden(${zi},${di})">${tended?'🌿':''}</div></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('garden-table').innerHTML = html;
+
+  const total = gardenData.flat().filter(Boolean).length;
+  const pct   = Math.round((total/(zones.length*7))*100);
+  document.getElementById('week-summary').textContent =
+    total===0 ? 'The garden is waiting for your care.' :
+    pct<20    ? 'A few tender beginnings. Keep going.' :
+    pct<40    ? 'The garden is waking up, slowly and surely.' :
+    pct<60    ? "Real care, real momentum. You're tending well." :
+    pct<80    ? 'Look at all of this. A sanctuary in bloom.' :
+                'Château Kay is fully tended. You did this. 🌸';
+}
+
+function toggleGarden(zi, di) {
+  gardenData[zi][di] = !gardenData[zi][di];
+  saveGarden(); renderGarden();
+}
+
+function resetGarden() {
+  if (confirm('Begin a new week? This will clear the current garden.')) {
+    gardenData = zones.map(() => Array(7).fill(false));
+    saveGarden(); renderGarden();
+  }
+}
+
+renderGarden();
+</script>
+</body>
+</html>
