@@ -556,6 +556,7 @@ const eveningPrompts = [
   "Where did you find beauty today — in your space, your body, your life?",
 ];
 
+document.addEventListener('DOMContentLoaded', function() {
 // ── DATE + SEED ───────────────────────────────────────
 const today = new Date();
 const DAYS_LONG  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -600,31 +601,46 @@ renderZones();
 function renderZones() {
   ['good','progress','help'].forEach(status => {
     const assigned = zones.filter(z => zoneStatus[z.name] === status);
-    document.getElementById('drop-'+status).innerHTML = assigned.map(z => `
-      <div class="zone-chip">
+    const drop = document.getElementById('drop-'+status);
+    drop.innerHTML = '';
+    assigned.forEach(z => {
+      const chip = document.createElement('div');
+      chip.className = 'zone-chip';
+      chip.innerHTML = `
         <div>
           <div class="zone-chip-name">${z.name}</div>
           <div class="zone-chip-sub">${z.sub}</div>
         </div>
-        <div class="zone-chip-remove" onclick="removeZone('${z.name}')">✕</div>
-      </div>`).join('');
+        <div class="zone-chip-remove">✕</div>`;
+      chip.querySelector('.zone-chip-remove').addEventListener('click', () => removeZone(z.name));
+      drop.appendChild(chip);
+    });
     document.getElementById('count-'+status).textContent = assigned.length + (assigned.length===1?' zone':' zones');
     const hdr = document.querySelector('#grp-'+status+' .status-header');
     hdr.className = 'status-header' + (assigned.length > 0 ? ' '+status : '');
   });
 
-  document.getElementById('unassigned-list').innerHTML = zones.filter(z => !zoneStatus[z.name]).map(z => `
-    <div class="unassigned-zone">
+  const unassigned = zones.filter(z => !zoneStatus[z.name]);
+  const ul = document.getElementById('unassigned-list');
+  ul.innerHTML = '';
+  unassigned.forEach(z => {
+    const div = document.createElement('div');
+    div.className = 'unassigned-zone';
+    div.innerHTML = `
       <div>
         <div class="unassigned-zone-name">${z.name}</div>
         <div class="unassigned-zone-sub">${z.sub}</div>
       </div>
       <div class="assign-btns">
-        <button class="assign-btn g" onclick="assignZone('${z.name}','good')">✓</button>
-        <button class="assign-btn p" onclick="assignZone('${z.name}','progress')">~</button>
-        <button class="assign-btn h" onclick="assignZone('${z.name}','help')">!</button>
-      </div>
-    </div>`).join('');
+        <button class="assign-btn g">✓</button>
+        <button class="assign-btn p">~</button>
+        <button class="assign-btn h">!</button>
+      </div>`;
+    div.querySelector('.assign-btn.g').addEventListener('click', () => assignZone(z.name, 'good'));
+    div.querySelector('.assign-btn.p').addEventListener('click', () => assignZone(z.name, 'progress'));
+    div.querySelector('.assign-btn.h').addEventListener('click', () => assignZone(z.name, 'help'));
+    ul.appendChild(div);
+  });
 }
 
 function assignZone(name, status) {
@@ -831,6 +847,7 @@ function resetGarden() {
 }
 
 renderGarden();
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
